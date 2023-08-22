@@ -7,7 +7,7 @@ app.set("port", 3000);
 const server = http.createServer(app);
 
 app.get("/a", (request, response) => {
-  response.json({ message: "Hey! This is your server response!" });
+  response.json({ message: "Hey! This is your server response 1!" });
 });
 
 server.listen(3000, () => {
