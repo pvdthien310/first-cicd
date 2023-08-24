@@ -10,6 +10,6 @@ app.get("/a", (request, response) => {
   response.json({ message: "Hey! This is your server response 1!" });
 });
 
-server.listen(3000, () => {
+server.listen(3300, () => {
   console.log("Server is running in port 3000");
 });
