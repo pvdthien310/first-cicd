@@ -1,4 +1,4 @@
-name: Docker CI
+name: docker-build-workflow
 
 on:
   push:
