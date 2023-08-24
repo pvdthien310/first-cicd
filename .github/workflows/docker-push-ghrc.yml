@@ -8,7 +8,7 @@ name: docker-push-ghcr-workflow
 on:
   workflow_run:
     workflows: [ "application-build-workflow" ]
-    branches: [ main ]
+    branches: [ "main" ]
     types:
       - completed
 
