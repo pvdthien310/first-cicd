@@ -6,27 +6,28 @@ on:
     branches: [ "main" ]
     types:
       - completed
+  repository_dispatch:
+    types: [ build-docker-step ]
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: pvdthien310/first-cicd
   # IMAGE_NAME: ${{ github.repository }} # returns HoussemDellai/github-actions-course : problem with uppercase
-  IMAGE_TAG: 1.0.${{ github.run_number }} # GITHUB_RUN_NUMBER }}
+  IMAGE_TAG: 1.0.${{ github.event.client_payload.image_tag }} # GITHUB_RUN_NUMBER }}
 
 jobs:
   test-curl-action:
-    name: "Perform REST API"
+    name: "Webhook Auto Deploy"
     runs-on: ubuntu-latest
     steps:
-      - name: "Call API 1"
+      - name: "Call webhook trigger auto deploy"
         uses: indiesdev/curl@v1.1
         id: api
         with:
           url:  ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK }}&${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          method: "POST"
-          accept: 201
-          body: '{ "name": "breeze", "job": "devops" }'
+          method: "GET"
+          accept: 201, 200
           log-response: true
       - name: "Use response"
         run: echo ${{ steps.api.outputs.response }}
