@@ -6,15 +6,13 @@ on:
     branches: [ "main" ]
     types:
       - completed
-  repository_dispatch:
-    types: [ 'build-docker-step' ]
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: pvdthien310/first-cicd
   # IMAGE_NAME: ${{ github.repository }} # returns HoussemDellai/github-actions-course : problem with uppercase
-  IMAGE_TAG: 1.0.${{ github.event.client_payload.image_tag }} # GITHUB_RUN_NUMBER }}
+  IMAGE_TAG: 1.0.${{ github.run_number }} # GITHUB_RUN_NUMBER }}
 
 jobs:
   test-curl-action:
