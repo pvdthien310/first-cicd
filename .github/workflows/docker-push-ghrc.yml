@@ -89,7 +89,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           event-type: build-docker-step
-          client-payload: {"image_tag": ${{ steps.build-and-push.outputs.image.name}}}
+          client-payload: {"image_tag": ${{ steps.build-and-push.outputs.metadata.image.name}}}
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
       # repository is public to avoid leaking data.  If you would like to publish
