@@ -1,0 +1,32 @@
+name: deploy-production
+
+on:
+  workflow_run:
+    workflows: [ "docker-push-ghcr-workflow" ]
+    branches: [ "main" ]
+    types:
+      - completed
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: pvdthien310/first-cicd
+  # IMAGE_NAME: ${{ github.repository }} # returns HoussemDellai/github-actions-course : problem with uppercase
+  IMAGE_TAG: 1.0.${{ github.run_number }} # GITHUB_RUN_NUMBER }}
+
+jobs:
+  test-curl-action:
+    name: "Perform REST API"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Call API 1"
+        uses: indiesdev/curl@v1.1
+        id: api
+        with:
+          url:  ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK }}&${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          method: "POST"
+          accept: 201
+          body: '{ "name": "breeze", "job": "devops" }'
+          log-response: true
+      - name: "Use response"
+        run: echo ${{ steps.api.outputs.response }}
