@@ -84,6 +84,7 @@ jobs:
           # tags: ghcr.io/houssemdellai/github-actions-course:${{ env.IMAGE_TAG }} # ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           event-type: 'build-docker-step'
+          token: ${{ secrets.PAT }}
           client-payload: '{"image_tag" : ${{ env.IMAGE_TAG }}}'
 
       # Sign the resulting Docker image digest except on PRs.
