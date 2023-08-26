@@ -84,12 +84,6 @@ jobs:
           # tags: ghcr.io/houssemdellai/github-actions-course:${{ env.IMAGE_TAG }} # ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      # Add image info to available in order to reuse in another workflows.
-      - name: Create available to store image info
-          # Map a step output to a job output
-        id: step1
-        run: echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} >> "$GITHUB_OUTPUT"
-
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
       # repository is public to avoid leaking data.  If you would like to publish
