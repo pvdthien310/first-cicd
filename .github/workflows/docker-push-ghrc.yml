@@ -107,5 +107,5 @@ jobs:
   deploy:
     uses: pvdthien310/first-cicd/.github/workflows/deploy-production.yml@main
     with:
-      image_name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      image_name: ghcr.io/pvdthien310/first-cicd:1.0.${{ github.run_number }}
 
