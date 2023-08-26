@@ -11,8 +11,8 @@ on:
     branches: [ "main" ]
     types:
       - completed
-
-
+      -
+  workflow_dispatch:
   # Allows you to run this workflow manually from the Actions tab
   # workflow_dispatch:
 
@@ -105,7 +105,7 @@ jobs:
 
 
   deploy:
-    uses: ./.github/workflows/deploy-production.yml@main
+    uses: pvdthien310/first-cicd/.github/workflows/deploy-production.yml@main
     with:
       image_name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
