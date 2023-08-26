@@ -24,6 +24,7 @@ jobs:
           method: "GET"
           accept: 201, 200
           log-response: true
+          timeout: 10000
       - name: "Use secrets"
         run: echo ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK }}&
       - name: "Use response"
