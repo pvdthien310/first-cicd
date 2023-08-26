@@ -1,18 +1,12 @@
 name: deploy-production
 
 on:
-  workflow_run:
-    workflows: [ "docker-push-ghcr-workflow" ]
-    branches: [ "main" ]
-    types:
-      - completed
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: pvdthien310/first-cicd
-  # IMAGE_NAME: ${{ github.repository }} # returns HoussemDellai/github-actions-course : problem with uppercase
-  IMAGE_TAG: 1.0.${{ github.run_number }} # GITHUB_RUN_NUMBER }}
+  workflow_call:
+    inputs:
+      image_name:
+        required: true
+        type: string
+
 
 jobs:
   test-curl-action:
@@ -23,7 +17,7 @@ jobs:
         uses: indiesdev/curl@v1.1
         id: api
         with:
-          url:  ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK }}&${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          url:  ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK }}&${{ inputs.image_name }}
           method: "GET"
           accept: 201, 200
           log-response: true
