@@ -103,4 +103,5 @@ jobs:
     uses: pvdthien310/first-cicd/.github/workflows/deploy-production.yml@main
     with:
       image_name: ghcr.io/pvdthien310/first-cicd:1.0.${{ github.run_number }}
+      prefix_webhook: ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK }}
 

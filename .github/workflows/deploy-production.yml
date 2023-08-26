@@ -6,6 +6,9 @@ on:
       image_name:
         required: true
         type: string
+      prefix_webhook:
+        required: true
+        type: string
 
 
 jobs:
@@ -17,7 +20,7 @@ jobs:
         uses: indiesdev/curl@v1.1
         id: api
         with:
-          url:  ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK}}&${{ inputs.image_name }}
+          url:  ${{ inputs.prefix_webhook }}&${{ inputs.image_name }}
           method: "GET"
           accept: 201, 200
           log-response: true
