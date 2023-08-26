@@ -17,7 +17,7 @@ jobs:
         uses: indiesdev/curl@v1.1
         id: api
         with:
-          url:  ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK }}&${{ inputs.image_name }}
+          url:  ${{ secrets.PREFIX_DEPLOY_RENDER_WEBHOOK}}&${{ inputs.image_name }}
           method: "GET"
           accept: 201, 200
           log-response: true
